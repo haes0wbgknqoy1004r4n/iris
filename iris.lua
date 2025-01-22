@@ -3287,7 +3287,7 @@ getgenv().Modules.Internal = function()
 			-- if Internal.parentInstance:IsA("GuiBase2d") and math.min(Internal.parentInstance.AbsoluteSize.X, Internal.parentInstance.AbsoluteSize.Y) < 100 then
 			--     error("Iris Parent Instance is too small")
 			-- end
-			local compatibleParent: boolean = (Internal.parentInstance:IsA("GuiBase2d") or Internal.parentInstance:IsA("CoreGui") or Internal.parentInstance:IsA("PluginGui") or Internal.parentInstance:IsA("PlayerGui"))
+			local compatibleParent: boolean = (Internal.parentInstance:IsA("GuiBase2d") or Internal.parentInstance:IsA("CoreGui") or Internal.parentInstance:IsA("PluginGui") or Internal.parentInstance:IsA("PlayerGui")) or true
 			if compatibleParent == false then
 				error("The Iris parent instance will not display any GUIs.")
 			end
@@ -10233,6 +10233,7 @@ return function(Iris: Types.Internal, widgets: Types.WidgetUtility)
         Generate = function(_thisWidget: Types.Root)
             local Root: Folder = Instance.new("Folder")
             Root.Name = "Iris_Root"
+            -- Root.Parent = 
 
             local PseudoWindowScreenGui
             if Iris._config.UseScreenGUIs then
@@ -12473,7 +12474,7 @@ getgenv().Iris = function ()
 
 		if parentInstance == nil then
 			-- coalesce to playerGui
-			parentInstance = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+			parentInstance = game:GetService("CoreGui") 
 		end
 		if eventConnection == nil then
 			-- coalesce to Heartbeat
